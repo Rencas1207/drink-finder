@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Row, Alert } from 'react-bootstrap'
+import useBebidas from '../hooks/useBebidas';
 import useCategorys from '../hooks/useCategorys'
 
 const Formulario = () => {
    const { categorys } = useCategorys();
+   const { consultarBebida } = useBebidas();
+
    const [alerta, setAlerta] = useState('');
    const [search, setSearch] = useState({
       name: '',
@@ -18,6 +21,7 @@ const Formulario = () => {
          return;
       }
       setAlerta('');
+      consultarBebida(search);
    }
 
    return (
