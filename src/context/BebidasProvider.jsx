@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { useState, useEffect, createContext } from 'react'
+import { useState, createContext } from 'react'
 
 const BebidasContext = createContext();
 
 export function BebidasProvider({ children }) {
 
    const [bebidas, setBebidas] = useState([]);
+   const [modal, setModal] = useState(false);
 
    const consultarBebida = async datos => {
       try {
@@ -17,10 +18,16 @@ export function BebidasProvider({ children }) {
       }
    }
 
+   const handleModalClick = () => {
+      setModal(!modal)
+   }
+
    return (
       <BebidasContext.Provider value={{
          consultarBebida,
-         bebidas
+         bebidas,
+         handleModalClick,
+         modal
       }}>
          {children}
       </BebidasContext.Provider>
